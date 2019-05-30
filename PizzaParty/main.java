@@ -9,35 +9,56 @@ public class main {
 		int numberOfSlicesPerPerson;
 		int numberOfSlicesPerPizza;
 		double costOfEachPizza;
-		int amountChargedCustomerForEachPizza;
+		double amountChargedCustomerForEachPizza;
 
-		System.out.println("Enter the number of people at the party");
-
+		System.out.print("Enter the number of people at the party ");
 		numberOfPeopleAtParty = stdin.nextInt();
-		System.out.println("Enter the number of slices per person");
+		System.out.print("Enter the number of slices for each person ");
 		numberOfSlicesPerPerson = stdin.nextInt();
-		System.out.println("Enter the number of slices per pizza");
+		System.out.print("Enter the number of slices per pizza ");
 		numberOfSlicesPerPizza = stdin.nextInt();
-		System.out.println("Enter the cost of each pizza");
-		costOfEachPizza = stdin.nextDouble();
-		System.out.println("Enter the ammount charged to the customer");
-		amountChargedCustomerForEachPizza = stdin.nextInt();
-	
-	int pizzasRequired = (numberOfPeopleAtParty * numberOfSlicesPerPerson) / numberOfSlicesPerPizza;
-	int sliceYield = pizzasRequired / numberOfSlicesPerPizza;
-	int customerCostForParty = pizzasRequired * amountChargedCustomerForEachPizza;
-	double catererCost = pizzasRequired * costOfEachPizza;
-	double profit = customerCostForParty - catererCost;
+		System.out.print("Enter the cost of each pizza ");
+		costOfEachPizza = stdin.nextFloat();
+		System.out.print("Enter the ammount charged to the customer ");
+		amountChargedCustomerForEachPizza = stdin.nextFloat();
 
-	String customerInvoiceReport = "\nCustomer Invoice Report\nThe party will require "+pizzasRequired+" pizzas yielding "+sliceYield+" slices."+"\nThe customer cost for the party is "+customerCostForParty+".";
+		calcCustomerInvoiceReport(numberOfPeopleAtParty,
+				numberOfSlicesPerPerson, numberOfSlicesPerPizza,
+				amountChargedCustomerForEachPizza);
+		calcCatererProfitReport(amountChargedCustomerForEachPizza,
+				numberOfPeopleAtParty, numberOfSlicesPerPerson,
+				numberOfSlicesPerPizza, costOfEachPizza);
+	}
 
-	String catererProfitReport = "\n\nCaterer Profit Report\nCustomer paid "+customerCostForParty+" for "+pizzasRequired+" pizzas."+"\nCaterer cost for the party is "+catererCost+" for "+pizzasRequired+" pizzas"+"\nProfit made is "+profit+".";
-	
-	System.out.print(customerInvoiceReport);
-	System.out.print(catererProfitReport);
+	public static void calcCustomerInvoiceReport(int numberOfPeopleAtParty,
+			int numberOfSlicesPerPerson, int numberOfSlicesPerPizza,
+			double amountChargedCustomerForEachPizza) {
 
-	
-	
-}
+		int pizzasRequired = (numberOfPeopleAtParty * numberOfSlicesPerPerson)
+				/ numberOfSlicesPerPizza;
+		int sliceYield = pizzasRequired / numberOfSlicesPerPizza;
+		float customerCostForParty = (float) (pizzasRequired * amountChargedCustomerForEachPizza);
+		System.out.println("\nCustomer Invoice Report\nThe party will require "
+				+ pizzasRequired + " pizzas yielding " + sliceYield
+				+ " slices." + "\nThe customer cost for the party is $"
+				+ customerCostForParty + ".");
+
+	}
+
+	public static void calcCatererProfitReport(
+			double amountChargedCustomerForEachPizza, int numberOfPeopleAtParty,
+			int numberOfSlicesPerPerson, int numberOfSlicesPerPizza,
+			double costOfEachPizza) {
+		int pizzasRequired = (numberOfPeopleAtParty * numberOfSlicesPerPerson)
+				/ numberOfSlicesPerPizza;
+		float customerCostForParty = (float) (pizzasRequired * amountChargedCustomerForEachPizza);
+		float catererCost = (float) (pizzasRequired * costOfEachPizza);
+		float profit = (float) (customerCostForParty - catererCost);
+		System.out.println("\n\nCaterer Profit Report\nCustomer paid $"
+				+ customerCostForParty + " for " + pizzasRequired + " pizzas."
+				+ "\nCaterer cost for the party is $" + catererCost + " for "
+				+ pizzasRequired + " pizzas" + "\nProfit made is $" + profit
+				+ ".");
+	}
 
 }
